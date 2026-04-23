@@ -98,10 +98,10 @@ This repo doubles as an agent skill (Claude Code & VS Code Copilot). Drop the re
 
 ```bash
 # Claude Code
-git clone https://github.com/your-org/tokmeter ~/.claude/skills/tokmeter
+git clone https://github.com/618coffee/tokmeter ~/.claude/skills/tokmeter
 
 # VS Code Copilot (workspace-scoped)
-git clone https://github.com/your-org/tokmeter .github/skills/tokmeter
+git clone https://github.com/618coffee/tokmeter .github/skills/tokmeter
 ```
 
 Then ask your agent: *"How many tokens did the last commit cost?"* and it will run `tokmeter commit HEAD` for you. See [SKILL.md](SKILL.md).

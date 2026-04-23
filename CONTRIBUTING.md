@@ -5,7 +5,7 @@ Thanks for your interest! tokmeter is small and tries to stay that way.
 ## Development setup
 
 ```bash
-git clone https://github.com/your-org/tokmeter
+git clone https://github.com/618coffee/tokmeter
 cd tokmeter
 python -m venv .venv && source .venv/bin/activate
 pip install -e '.[dev,estimate]'
