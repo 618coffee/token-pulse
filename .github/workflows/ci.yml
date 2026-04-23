@@ -25,4 +25,4 @@ jobs:
       - name: Lint
         run: ruff check src tests
       - name: Test
-        run: pytest --cov=token_meter --cov-report=term-missing
+        run: pytest --cov=token_pulse --cov-report=term-missing

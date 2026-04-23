@@ -1,4 +1,4 @@
-# token-meter
+# token-pulse
 
 Attribute AI assistant token usage to **turns, sessions, commits, branches, PRs, time windows, or files** — answering questions like *"how many tokens did this PR cost me?"*
 
@@ -10,45 +10,45 @@ Reads local Claude Code session logs (`~/.claude/projects/**/*.jsonl`) for accur
 
 ```bash
 # pipx (recommended)
-pipx install token-meter
+pipx install token-pulse
 
 # or pip
-pip install token-meter
+pip install token-pulse
 
 # with optional tiktoken-based estimation for Copilot logs
-pip install 'token-meter[estimate]'
+pip install 'token-pulse[estimate]'
 ```
 
 ## Quick start
 
 ```bash
 # Last conversation turn
-token-meter turn
+token-pulse turn
 
 # Current session
-token-meter session
+token-pulse session
 
 # A specific commit
-token-meter commit HEAD
-token-meter commit a1b2c3d
+token-pulse commit HEAD
+token-pulse commit a1b2c3d
 
 # Range of commits
-token-meter commit HEAD~5..HEAD
+token-pulse commit HEAD~5..HEAD
 
 # Everything since branching off main
-token-meter branch --base main
+token-pulse branch --base main
 
 # A pull request (uses `gh` CLI)
-token-meter pr 1234
+token-pulse pr 1234
 
 # Arbitrary time window
-token-meter window --since "2026-04-20" --until "2026-04-22"
+token-pulse window --since "2026-04-20" --until "2026-04-22"
 
 # Per-file attribution from tool calls (Edit/Write/Read targets)
-token-meter file src/foo.py
+token-pulse file src/foo.py
 
 # JSON output for piping
-token-meter session --json
+token-pulse session --json
 ```
 
 ### Sample output
@@ -71,14 +71,14 @@ Backend: claude-code (12 turns, 1 session)
 
 ## Why?
 
-Existing tools (`ccusage`, `splitrail`, etc.) give you per-day/per-session totals. `token-meter` lets you slice the **same underlying data** by VCS-meaningful boundaries:
+Existing tools (`ccusage`, `splitrail`, etc.) give you per-day/per-session totals. `token-pulse` lets you slice the **same underlying data** by VCS-meaningful boundaries:
 
 | Question | Command |
 |---|---|
-| How much did this PR cost? | `token-meter pr 42` |
-| Which commit was most token-expensive? | `token-meter commit HEAD~10..HEAD --rank` |
-| Which file consumes the most agent context? | `token-meter file --top 10` |
-| What was the burn rate this morning? | `token-meter window --since 09:00` |
+| How much did this PR cost? | `token-pulse pr 42` |
+| Which commit was most token-expensive? | `token-pulse commit HEAD~10..HEAD --rank` |
+| Which file consumes the most agent context? | `token-pulse file --top 10` |
+| What was the burn rate this morning? | `token-pulse window --since 09:00` |
 
 ## Backends
 
@@ -89,7 +89,7 @@ Parses JSONL files in `~/.claude/projects/` (override with `CLAUDE_PROJECTS_DIR`
 Parses VS Code workspace storage chat logs (`~/Library/Application Support/Code/User/workspaceStorage/<id>/GitHub.copilot-chat/`). Token counts are *estimated* by re-tokenizing message text with `tiktoken` (or a `chars/4` heuristic if `tiktoken` is not installed). **Does not include hidden system prompts or tool-call payloads**, so expect 30–60% under-counting. Useful for relative comparisons, not billing.
 
 ```bash
-token-meter session --backend copilot
+token-pulse session --backend copilot
 ```
 
 ## Use as an agent skill
@@ -98,17 +98,17 @@ This repo doubles as an agent skill (Claude Code & VS Code Copilot). Drop the re
 
 ```bash
 # Claude Code
-git clone https://github.com/618coffee/token-meter ~/.claude/skills/token-meter
+git clone https://github.com/618coffee/token-pulse ~/.claude/skills/token-pulse
 
 # VS Code Copilot (workspace-scoped)
-git clone https://github.com/618coffee/token-meter .github/skills/token-meter
+git clone https://github.com/618coffee/token-pulse .github/skills/token-pulse
 ```
 
-Then ask your agent: *"How many tokens did the last commit cost?"* and it will run `token-meter commit HEAD` for you. See [SKILL.md](SKILL.md).
+Then ask your agent: *"How many tokens did the last commit cost?"* and it will run `token-pulse commit HEAD` for you. See [SKILL.md](SKILL.md).
 
 ## Configuration
 
-Optional `~/.config/token-meter/config.toml`:
+Optional `~/.config/token-pulse/config.toml`:
 
 ```toml
 default_backend = "claude-code"

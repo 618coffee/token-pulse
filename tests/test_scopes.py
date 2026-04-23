@@ -2,9 +2,9 @@ from pathlib import Path
 
 import pytest
 
-from token_meter.backends.claude_code import ClaudeCodeBackend
-from token_meter.cli import _filter_window, _scale_event
-from token_meter.aggregate import aggregate
+from token_pulse.backends.claude_code import ClaudeCodeBackend
+from token_pulse.cli import _filter_window, _scale_event
+from token_pulse.aggregate import aggregate
 
 from .fixtures import write_fixture
 from datetime import datetime, timezone

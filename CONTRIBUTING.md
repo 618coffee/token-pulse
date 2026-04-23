@@ -1,12 +1,12 @@
-# Contributing to token-meter
+# Contributing to token-pulse
 
-Thanks for your interest! token-meter is small and tries to stay that way.
+Thanks for your interest! token-pulse is small and tries to stay that way.
 
 ## Development setup
 
 ```bash
-git clone https://github.com/618coffee/token-meter
-cd token-meter
+git clone https://github.com/618coffee/token-pulse
+cd token-pulse
 python -m venv .venv && source .venv/bin/activate
 pip install -e '.[dev,estimate]'
 pytest
@@ -15,7 +15,7 @@ ruff check src tests
 
 ## Adding a new scope
 
-1. Add a `cmd_<scope>` handler in `src/token_meter/cli.py`.
+1. Add a `cmd_<scope>` handler in `src/token_pulse/cli.py`.
 2. Wire it up in `build_parser()`.
 3. Reuse `_load_events`, `_filter_window`, and `aggregate` — don't duplicate logic.
 4. Add a test in `tests/`.
@@ -23,7 +23,7 @@ ruff check src tests
 
 ## Adding a new backend
 
-1. Subclass the `Backend` protocol in `src/token_meter/backends/`.
+1. Subclass the `Backend` protocol in `src/token_pulse/backends/`.
 2. Yield `TokenEvent` instances. Set `estimated=True` if counts are not exact.
 3. Register it in `backends/__init__.py::get_backend`.
 4. Add a `--backend <name>` test.
@@ -31,11 +31,11 @@ ruff check src tests
 
 ## Pricing updates
 
-Edit `src/token_meter/pricing.py::DEFAULT_PRICES`. Reference the provider's pricing page in the commit message.
+Edit `src/token_pulse/pricing.py::DEFAULT_PRICES`. Reference the provider's pricing page in the commit message.
 
 ## Release
 
-1. Bump version in `pyproject.toml` and `src/token_meter/__init__.py`.
+1. Bump version in `pyproject.toml` and `src/token_pulse/__init__.py`.
 2. Update `CHANGELOG.md`.
 3. Tag and push: `git tag v0.x.y && git push --tags`.
 4. Create a GitHub release — `publish.yml` auto-publishes to PyPI.

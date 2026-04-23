@@ -1,4 +1,4 @@
-"""token-meter CLI."""
+"""token-pulse CLI."""
 
 from __future__ import annotations
 
@@ -269,10 +269,10 @@ def _add_common(parser: argparse.ArgumentParser) -> None:
 
 def build_parser() -> argparse.ArgumentParser:
     p = argparse.ArgumentParser(
-        prog="token-meter",
+        prog="token-pulse",
         description="Attribute AI assistant token usage to turns, sessions, commits, branches, PRs, time windows, or files.",
     )
-    p.add_argument("--version", action="version", version=f"token-meter {__version__}")
+    p.add_argument("--version", action="version", version=f"token-pulse {__version__}")
     sub = p.add_subparsers(dest="command", required=True)
 
     sp = sub.add_parser("turn", help="Last assistant turn.")
