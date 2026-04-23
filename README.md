@@ -1,4 +1,4 @@
-# tokmeter
+# token-meter
 
 Attribute AI assistant token usage to **turns, sessions, commits, branches, PRs, time windows, or files** — answering questions like *"how many tokens did this PR cost me?"*
 
@@ -10,45 +10,45 @@ Reads local Claude Code session logs (`~/.claude/projects/**/*.jsonl`) for accur
 
 ```bash
 # pipx (recommended)
-pipx install tokmeter
+pipx install token-meter
 
 # or pip
-pip install tokmeter
+pip install token-meter
 
 # with optional tiktoken-based estimation for Copilot logs
-pip install 'tokmeter[estimate]'
+pip install 'token-meter[estimate]'
 ```
 
 ## Quick start
 
 ```bash
 # Last conversation turn
-tokmeter turn
+token-meter turn
 
 # Current session
-tokmeter session
+token-meter session
 
 # A specific commit
-tokmeter commit HEAD
-tokmeter commit a1b2c3d
+token-meter commit HEAD
+token-meter commit a1b2c3d
 
 # Range of commits
-tokmeter commit HEAD~5..HEAD
+token-meter commit HEAD~5..HEAD
 
 # Everything since branching off main
-tokmeter branch --base main
+token-meter branch --base main
 
 # A pull request (uses `gh` CLI)
-tokmeter pr 1234
+token-meter pr 1234
 
 # Arbitrary time window
-tokmeter window --since "2026-04-20" --until "2026-04-22"
+token-meter window --since "2026-04-20" --until "2026-04-22"
 
 # Per-file attribution from tool calls (Edit/Write/Read targets)
-tokmeter file src/foo.py
+token-meter file src/foo.py
 
 # JSON output for piping
-tokmeter session --json
+token-meter session --json
 ```
 
 ### Sample output
@@ -71,14 +71,14 @@ Backend: claude-code (12 turns, 1 session)
 
 ## Why?
 
-Existing tools (`ccusage`, `splitrail`, etc.) give you per-day/per-session totals. `tokmeter` lets you slice the **same underlying data** by VCS-meaningful boundaries:
+Existing tools (`ccusage`, `splitrail`, etc.) give you per-day/per-session totals. `token-meter` lets you slice the **same underlying data** by VCS-meaningful boundaries:
 
 | Question | Command |
 |---|---|
-| How much did this PR cost? | `tokmeter pr 42` |
-| Which commit was most token-expensive? | `tokmeter commit HEAD~10..HEAD --rank` |
-| Which file consumes the most agent context? | `tokmeter file --top 10` |
-| What was the burn rate this morning? | `tokmeter window --since 09:00` |
+| How much did this PR cost? | `token-meter pr 42` |
+| Which commit was most token-expensive? | `token-meter commit HEAD~10..HEAD --rank` |
+| Which file consumes the most agent context? | `token-meter file --top 10` |
+| What was the burn rate this morning? | `token-meter window --since 09:00` |
 
 ## Backends
 
@@ -89,7 +89,7 @@ Parses JSONL files in `~/.claude/projects/` (override with `CLAUDE_PROJECTS_DIR`
 Parses VS Code workspace storage chat logs (`~/Library/Application Support/Code/User/workspaceStorage/<id>/GitHub.copilot-chat/`). Token counts are *estimated* by re-tokenizing message text with `tiktoken` (or a `chars/4` heuristic if `tiktoken` is not installed). **Does not include hidden system prompts or tool-call payloads**, so expect 30–60% under-counting. Useful for relative comparisons, not billing.
 
 ```bash
-tokmeter session --backend copilot
+token-meter session --backend copilot
 ```
 
 ## Use as an agent skill
@@ -98,17 +98,17 @@ This repo doubles as an agent skill (Claude Code & VS Code Copilot). Drop the re
 
 ```bash
 # Claude Code
-git clone https://github.com/618coffee/token-meter ~/.claude/skills/tokmeter
+git clone https://github.com/618coffee/token-meter ~/.claude/skills/token-meter
 
 # VS Code Copilot (workspace-scoped)
-git clone https://github.com/618coffee/token-meter .github/skills/tokmeter
+git clone https://github.com/618coffee/token-meter .github/skills/token-meter
 ```
 
-Then ask your agent: *"How many tokens did the last commit cost?"* and it will run `tokmeter commit HEAD` for you. See [SKILL.md](SKILL.md).
+Then ask your agent: *"How many tokens did the last commit cost?"* and it will run `token-meter commit HEAD` for you. See [SKILL.md](SKILL.md).
 
 ## Configuration
 
-Optional `~/.config/tokmeter/config.toml`:
+Optional `~/.config/token-meter/config.toml`:
 
 ```toml
 default_backend = "claude-code"

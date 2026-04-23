@@ -2,8 +2,8 @@ from pathlib import Path
 
 import pytest
 
-from tokmeter.aggregate import aggregate
-from tokmeter.backends.claude_code import ClaudeCodeBackend
+from token_meter.aggregate import aggregate
+from token_meter.backends.claude_code import ClaudeCodeBackend
 
 from .fixtures import write_fixture
 

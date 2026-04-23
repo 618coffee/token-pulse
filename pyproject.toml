@@ -3,12 +3,12 @@ requires = ["hatchling>=1.18"]
 build-backend = "hatchling.build"
 
 [project]
-name = "tokmeter"
+name = "token-meter"
 version = "0.1.0"
 description = "Attribute AI assistant token usage to turns, sessions, commits, branches, PRs, time windows, or files."
 readme = "README.md"
 license = { text = "MIT" }
-authors = [{ name = "tokmeter contributors" }]
+authors = [{ name = "token-meter contributors" }]
 requires-python = ">=3.9"
 keywords = ["claude", "claude-code", "copilot", "tokens", "usage", "ccusage", "ai", "llm"]
 classifiers = [
@@ -26,14 +26,14 @@ estimate = ["tiktoken>=0.7"]
 dev = ["pytest>=7", "pytest-cov>=4", "ruff>=0.5"]
 
 [project.scripts]
-tokmeter = "tokmeter.cli:main"
+token-meter = "token_meter.cli:main"
 
 [project.urls]
 Homepage = "https://github.com/618coffee/token-meter"
 Issues = "https://github.com/618coffee/token-meter/issues"
 
 [tool.hatch.build.targets.wheel]
-packages = ["src/tokmeter"]
+packages = ["src/token_meter"]
 
 [tool.ruff]
 line-length = 100

@@ -18,7 +18,7 @@ class ModelPrice:
 
 
 # Defaults reflect Anthropic public pricing (as of early 2026). Update via
-# ~/.config/tokmeter/config.toml [pricing.overrides] if these go stale.
+# ~/.config/token-meter/config.toml [pricing.overrides] if these go stale.
 DEFAULT_PRICES: Dict[str, ModelPrice] = {
     "claude-sonnet-4-5":      ModelPrice(3.00, 15.00, 0.30, 3.75),
     "claude-sonnet-4":        ModelPrice(3.00, 15.00, 0.30, 3.75),

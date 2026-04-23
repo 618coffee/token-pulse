@@ -1,4 +1,4 @@
-from tokmeter.pricing import compute_cost, lookup_price
+from token_meter.pricing import compute_cost, lookup_price
 
 
 def test_lookup_price_exact():
